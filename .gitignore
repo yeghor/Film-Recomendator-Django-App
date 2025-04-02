@@ -1,0 +1,10 @@
+.vscode/
+migrations/
+API_requests/
+__pycahe__/
+beta_chromaDB/
+fr_env/
+json_data/films_data.json
+json_data/add_genre.py
+WebAPI/
+db.sqlite3

@@ -1,0 +1,26 @@
+{% extends 'film_recomendator_app/base.html' %}
+{% load static %}
+
+{% block page_header %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">I think you should look on these.</h2>
+{% endblock page_header %}
+
+{% block content %}
+    <div class="row">
+        {% for film in meta|slice:":5" %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ media_url }}posters/{{ film.id }}.jpg" class="card-img-top" alt="{{ film.title }}" style="width: 10vw; min-width: 50px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ film.title }}</h5>
+                        <p class="card-text">{{ film.description|slice:":100" }}...</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
+</div>
+
+

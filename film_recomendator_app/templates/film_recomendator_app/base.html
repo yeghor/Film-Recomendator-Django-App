@@ -1,0 +1,70 @@
+{% load django_bootstrap5 %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+    shrink-to-fit=no">
+    <title>Film Recomendator</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">   
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'top_searches' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link active">Top Searches</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'search_history' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link active">History</button>
+                        </form>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <form class="d-flex" action="{% url 'auth:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="nav-link" type="submit">Logout</button>
+                        </form>
+                    </li>    
+                    {% else %}
+                    <li>
+                        <form class="d-flex" action="{% url 'auth:login' %}" method="post">
+                            {% csrf_token %}
+                            <button class="nav-link" type="submit">Login</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form class="d-flex" action="{% url 'auth:register' %}" method="post">
+                            {% csrf_token %}
+                            <button class="nav-link" type="submit">Register</button>
+                        </form>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main role="main" class="container">
+        <div class="pb-2 mb-2 border-bottom">
+            {% block page_header %}{% endblock page_header %}
+        </div>
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
+</body>
+
+</html>

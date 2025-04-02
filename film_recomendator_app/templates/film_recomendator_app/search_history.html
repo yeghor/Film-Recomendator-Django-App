@@ -1,0 +1,31 @@
+{% extends 'film_recomendator_app/base.html' %}
+{% load static %}
+
+{% block page_header %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Your Search History</h2>
+    <p class="text-center text-muted mb-4">View the films you have searched for recently. You can delete your history anytime.</p>
+    {% if history %}
+    <form action="{% url 'delete_history' %}" method="post" class="d-flex justify-content-center mb-4">
+        {% csrf_token %}
+        <button class="btn btn-danger px-4 py-2" type="submit">Delete History</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock page_header %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        {% for film in history %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-light rounded h-100">
+                    <img src="{{ film.poster_url }}" class="card-img-top img-fluid" alt="{{ film.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title text-truncate">{{ film.title }}</h5>
+                        <p class="card-text text-muted">{{ film.date }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

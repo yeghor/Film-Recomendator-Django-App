@@ -1,0 +1,21 @@
+{% extends "film_recomendator_app/base.html" %}
+{% load django_bootstrap5 %}
+
+{% block page_header %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Login, if you allready have an account</h2>
+    <p class="text-center text-muted mb-4">To use our platform, you have to be logged in</p>
+</div>
+{% endblock page_header %}
+
+
+{% block content %}
+<div class="">
+    <form method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="hidden" name="next" value="{% url 'index' %}"/>
+    </form>
+</div>
+{% endblock content %}
