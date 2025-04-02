@@ -8,3 +8,4 @@ json_data/films_data.json
 json_data/add_genre.py
 WebAPI/
 db.sqlite3
+.venv
